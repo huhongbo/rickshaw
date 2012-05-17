@@ -85,7 +85,7 @@ Rickshaw.Series = Rickshaw.Class.create( Array, {
 		var data = {
 			timeBase: this.timeBase,
 			timeInterval: this.timeInterval,
-			items: [],
+			items: []
 		};
 
 		this.forEach( function(item) {
