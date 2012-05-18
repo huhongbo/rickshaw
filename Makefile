@@ -2,7 +2,7 @@
 #NODE_MODULES=$(NODE_PREFIX)/node_modules
 
 #CSS_MIN=$(NODE_MODULES)/.bin/cleancss
-#JS_MIN=$(NODE_MODULES)/.bin/uglifyjs
+JS_MIN=$(shell npm root)/.bin/uglifyjs
 
 #CSS_FILES=\
 #	src/css/detail.css\
@@ -27,7 +27,7 @@ JS_FILES=\
 	
 .PHONY: clean build
 
-build: rickshaw.js
+build: rickshaw.js rickshaw.min.js
 
 clean:
 	rm -rf rickshaw.js
@@ -35,8 +35,8 @@ clean:
 #$(CSS_MIN):
 #	npm install clean-css
 
-#$(JS_MIN):
-#	npm install uglify-js
+$(JS_MIN):
+	npm install uglify-js
 
 #rickshaw.css:
 #	cat $(CSS_FILES) > rickshaw.css
@@ -47,5 +47,5 @@ rickshaw.js:
 #rickshaw.min.css: $(CSS_MIN) rickshaw.css
 #	$(CSS_MIN) rickshaw.css > rickshaw.min.css
 
-#rickshaw.min.js: $(JS_MIN) rickshaw.js
-#	$(JS_MIN) --reserved-names "\$$super" rickshaw.js > rickshaw.min.js
+rickshaw.min.js: $(JS_MIN) rickshaw.js
+	$(JS_MIN) --reserved-names "\$$super" rickshaw.js > rickshaw.min.js
